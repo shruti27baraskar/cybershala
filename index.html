@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberShala</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<!-- other page content -->
+
+<div class="gtranslate_wrapper"></div>
+<script>
+window.gtranslateSettings = {
+  "default_language":"en",
+  "languages":["en","mr","hi"],
+  "wrapper_selector":".gtranslate_wrapper",
+  "switcher_horizontal_position":"right",
+  "switcher_vertical_position":"top"
+}
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+
+</body>
+</html>
+
+<body>
+
+<body class="home">
+    <header class="navbar">
+        <div class="logo">
+    <img src="logo1.png" alt="CyberShield Logo" class="logo-img">
+
+    <div class="logo-text">
+        <span class="brand">CyberShala</span>
+        <small>Empowering Safe and Aware Digital Citizens</small>
+    </div>
+</div>
+        <nav>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#report">Portals</a>
+                
+                <a href="#verify">Threat Analysis</a>
+                <a href="knowledge.html">Knowledge</a>
+                <a href="about.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+</body>
+
+
+<section class="hero">
+    
+    <div class="hero-text">
+        <h1>
+            Protect, Maintain, Secure – 
+            <span class="highlight">Your Digital Safety,</span>
+              <span class="neon">Our Responsibility</span>
+        </h1>
+
+        <p>
+            Secure Today, Strong Tomorrow
+        </p>
+
+        <div class="buttons">
+    <a href="https://cybercrime.gov.in" target="_blank">
+        <button class="btn primary">Report a Crime Now</button>
+    </a>
+
+    <a href="hygine.html" target="_blank">
+        <button class="btn secondary">Hygiene Checklist</button>
+    </a>
+       </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="shield-glow"></div>
+        <img src="shield.png" class="shield" alt="Cyber Shield">
+    </div>
+</section>
+
+<section class="quick-report" id="report">
+    <h2>Quick Reporting & <span>Emergency Links</span></h2>
+
+    <div class="card-grid">
+        <div class="neon-card" onclick="openPortal('cyber')">
+            <span class="neon-badge">CRITICAL</span>
+            <div class="icon">🛡️</div>
+            <h3>National Cyber Crime<br>Reporting Portal</h3>
+            <p>Official portal for hacking, financial fraud, and harassment.</p>
+        </div>
+
+        <div class="neon-card" onclick="openPortal('ceir')">
+            <span class="neon-badge">SPAM</span>
+            <div class="icon">📱</div>
+            <h3>CEIR – Mobile / IMEI Block</h3>
+            <p>Report lost or stolen phones and block IMEI nationwide.</p>
+        </div>
+
+        <div class="neon-card" onclick="openPortal('tafcop')">
+            <span class="neon-badge">MOBILE</span>
+            <div class="icon">📡</div>
+            <h3>TAFCOP</h3>
+            <p>Telecom complaints like spam calls or SIM misuse.</p>
+        </div>
+
+        <div class="neon-card" onclick="openPortal('chakshu')">
+            <span class="neon-badge">IDENTITY</span>
+            <div class="icon">🚨</div>
+            <h3>CHAKSHU</h3>
+            <p>Emergency threats & immediate physical crime reporting.</p>
+        </div>
+    </div>
+</section>
+
+<!-- POPUP (UNCHANGED DESIGN) -->
+<div class="portal-overlay" id="portalOverlay">
+    <span class="close-btn" onclick="closePortal()">✕</span>
+    <h1 id="portalTitle"></h1>
+
+    <div class="portal-card">
+        <h3>How to use this portal</h3>
+        <ol id="portalSteps"></ol>
+    </div>
+
+    <button class="portal-main-btn" onclick="goToOfficialPortal()">
+    Go to Official Portal
+</button>
+
+</div>
+
+<script>
+/* PORTAL CONTENT */
+const portalData = {
+    cyber: {
+        title: "National Cyber Crime Reporting Portal",
+        steps: [
+            "Visit official portal",
+            " Click on “Report Cyber Crime",
+            "Choose type of complaint (e.g., financial fraud, social media abuse).",
+            "Create an account/login with your email/phone",
+            "Fill in personal details (name, contact info, address).",
+            "Provide details of the incident (description, date, time).",
+            "Upload supporting documents (screenshots, emails, chat logs, bank statements).",
+            "Review and submit your complaint.",
+            "Copy the complaint ID or take a screenshot for future tracking.",
+            "Track progress online using the complaint ID.",
+            "Documents to Use: Screenshots, email/chat records, identity proof (Aadhaar, passport), bank statement if financial fraud."
+        ]
+        
+    },
+    ceir: {
+        title: "CEIR – IMEI Blocking Portal",
+        steps: [
+            "Visit CEIR website",
+            "Enter phone details",
+            "Upload FIR",
+            "Submit IMEI",
+            "Track status"
+        ]
+    },
+    tafcop: {
+        title: "TAFCOP Telecom Complaints",
+        steps: [
+            "Login using mobile",
+            "View SIM cards",
+            "Report misuse"
+        ]
+    },
+    chakshu: {
+        title: "CHAKSHU Emergency Reporting",
+        steps: [
+            "Select emergency category",
+            "Submit details",
+            "Call 100 if critical"
+        ]
+    }
+};
+
+/* 🔗 OFFICIAL LINKS — EDIT ONLY THESE */
+const portalLinks = {
+    cyber: "https://www.cybercrime.gov.in/",
+    ceir: "https://www.ceir.gov.in/Home/index.jsp",
+    tafcop: "https://tafcop.sancharsaathi.gov.in/telecomUser/",
+    chakshu: "https://sancharsaathi.gov.in/sfc/"
+};
+
+let activePortal = "";
+
+/* OPEN POPUP */
+function openPortal(type) {
+    activePortal = type;
+
+    document.getElementById("portalTitle").innerText =
+        portalData[type].title;
+
+    const steps = document.getElementById("portalSteps");
+    steps.innerHTML = "";
+
+    portalData[type].steps.forEach(step => {
+        const li = document.createElement("li");
+        li.innerText = step;
+        steps.appendChild(li);
+    });
+
+    document.getElementById("portalOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
+
+/* CLOSE POPUP */
+function closePortal() {
+    document.getElementById("portalOverlay").style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+/* OPEN OFFICIAL PORTAL */
+function goToOfficialPortal() {
+    if (activePortal && portalLinks[activePortal]) {
+        window.open(portalLinks[activePortal], "_blank");
+    }
+}
+</script>
+<!-- ========================
+     VERIFY & PROTECT SECTION
+======================== -->
+<section class="info-section" id="verify">
+    <h2>Deep Threat Analysis <span></span></h2>
+
+    <div class="card-grid three-cards">
+
+        <!-- VirusTotal -->
+        <div class="tool-card">
+            <span class="badge malware">MALWARE</span>
+
+            <h3>VirusTotal</h3>
+            <p>
+                Upload files or paste URLs to scan them against 70+ top-tier
+                antivirus engines like Kaspersky and Bitdefender.
+            </p>
+
+            <div class="card-actions">
+                <button class="btn primary"
+                    onclick="window.open('https://www.virustotal.com/', '_blank')">
+                    Scan File
+                </button>
+
+                <button class="btn secondary"
+                    onclick="openGuide('virustotal')">
+                    Scan Guide
+                </button>
+            </div>
+        </div>
+
+        <!-- Have I Been Pwned -->
+        <div class="tool-card">
+            <span class="badge privacy">PRIVACY</span>
+
+            <h3>Have I Been Pwned</h3>
+            <p>
+                Check if your email or phone number has been leaked in a data breach.
+                Essential for preventing account takeovers.
+            </p>
+
+            <div class="card-actions">
+                <button class="btn primary"
+                    onclick="window.open('https://haveibeenpwned.com/', '_blank')">
+                    Check Leak
+                </button>
+
+                <button class="btn secondary"
+                    onclick="openGuide('hibp')">
+                    Instructions
+                </button>
+            </div>
+        </div>
+
+        <!-- CheckPhish & IPQS -->
+        <div class="tool-card">
+            <span class="badge ai">ADVANCED AI</span>
+
+            <h3>CheckPhish & IPQS</h3>
+            <p>
+                Use Bloster’s AI to identify "look-alike" phishing sites and
+                IPQS to check the reputation of suspicious IP addresses.
+            </p>
+
+            <div class="card-actions">
+                <button class="btn primary"
+                    onclick="window.open('https://checkphish.bolster.ai/', '_blank')">
+                    Verify Link
+                </button>
+
+                <button class="btn secondary"
+                    onclick="openGuide('checkphish')">
+                    IP Reputation
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================
+     GUIDE POPUP SCRIPT
+======================== -->
+<script>
+const guideData = {
+    virustotal: {
+        title: "How to use VirusTotal",
+        steps: [
+            "Open VirusTotal website",
+            "Upload a file or paste a URL",
+            "Wait for scan completion",
+            "Review detection results carefully"
+        ]
+    },
+    hibp: {
+        title: "How to use Have I Been Pwned",
+        steps: [
+            "Enter your email or phone number",
+            "Check breach history",
+            "Secure affected accounts",
+            "Enable two-factor authentication"
+        ]
+    },
+    checkphish: {
+        title: "Using CheckPhish & IPQS",
+        steps: [
+            "Paste suspicious URL",
+            "Review phishing detection score",
+            "Check IP reputation",
+            "Avoid interacting with flagged links"
+        ]
+    }
+};
+
+function openGuide(type) {
+    document.getElementById("portalTitle").innerText =
+        guideData[type].title;
+
+    const steps = document.getElementById("portalSteps");
+    steps.innerHTML = "";
+
+    guideData[type].steps.forEach(step => {
+        const li = document.createElement("li");
+        li.innerText = step;
+        steps.appendChild(li);
+    });
+
+    document.querySelector(".portal-main-btn").style.display = "none";
+    document.getElementById("portalOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
+</script>
+
+
+</body>
+</html> 

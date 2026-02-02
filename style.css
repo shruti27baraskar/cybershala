@@ -1,0 +1,474 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --accent: #4fd3ff;           /* new azure accent */
+    --accent-glow: rgba(79,211,255,0.6); /* new glow */
+}
+
+body {
+    background: radial-gradient(circle at top,#071627, #061d2b);
+    color: rgba(255,255,255,0.9);
+}
+
+/* MAIN PAGE BUTTONS – RESTORED */
+.buttons {
+    margin: 32px 0;
+    display: flex;
+    gap: 18px;
+}
+
+.btn {
+    padding: 16px 38px;            
+    border-radius: 40px;           
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    position: relative;
+}
+
+/* PRIMARY BUTTON */
+.primary {
+    background: var(--accent);
+    color: #02121a;
+    box-shadow:
+        0 0 25px var(--accent-glow),
+        0 0 45px rgba(79,211,255,0.4);
+}
+
+/* PRIMARY HOVER */
+.primary:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 0 35px var(--accent-glow),
+        0 0 70px rgba(79,211,255,0.5);
+}
+
+/* SECONDARY BUTTON */
+.secondary {
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 0 18px rgba(79,211,255,0.4);
+}
+
+/* SECONDARY HOVER */
+.secondary:hover {
+    transform: translateY(-6px);
+    background: rgba(79,211,255,0.12);
+    box-shadow:
+        0 0 30px var(--accent-glow),
+        0 0 55px rgba(79,211,255,0.3);
+}
+
+/* ========================
+   Navbar Container
+======================== */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 70px;
+    background: transparent;
+}
+
+/* Neon Pulse Line */
+
+
+@keyframes navPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* Navbar Links */
+nav a {
+    position: relative;
+    margin-left: 30px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 8px 18px;
+    border-radius: 30px;
+}
+
+body.home .navbar {
+    background: transparent;
+}
+
+/* Hover effect - glowing capsule */
+nav a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
+    background: rgba(79,211,255,0.1);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Neon underline for active links */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 14px var(--accent);
+    transform: translateX(-50%);
+    transition: width 0.35s ease;
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+/* Active link capsule + glow */
+nav a.active {
+    color: var(--accent);
+    background: rgba(79,211,255,0.15);
+    box-shadow: 0 0 20px var(--accent-glow);
+    text-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Logo Styling */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    width: 98px;
+    height: 98px;
+    object-fit: contain;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    
+}
+.logo .brand {
+    font-size: 38px;   /* increase this value */
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow:
+        0 0 12px var(--accent-glow),
+        0 0 22px rgba(79,211,255,0.7);
+}
+.logo .brand {
+    animation: logoGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+    from {
+        text-shadow: 0 0 10px var(--accent-glow);
+    }
+    to {
+        text-shadow:
+            0 0 18px var(--accent-glow),
+            0 0 30px rgba(79,211,255,0.7);
+    }
+}
+
+/* LOGO FIX */
+/* Smooth Hover Glow */
+nav a:hover {
+    animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 15px var(--accent-glow); }
+    100% { box-shadow: 0 0 25px var(--accent-glow); }
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    padding: 60px;
+}
+
+.hero-text h1 {
+    font-size: 56px;
+    line-height: 1.25;
+}
+
+.neon {
+    color: var(--accent);
+    text-shadow: 0 0 14px var(--accent-glow);
+}
+
+/* SHIELD FLOATING RESTORED */
+.shield {
+    width: 520px;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    50% { transform: translateY(-18px); }
+}
+
+/* QUICK REPORT */
+.quick-report {
+    min-height: 82vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 60px;
+}
+
+.quick-report h2 {
+    text-align: left;
+    color: var(--accent);
+    margin-bottom: 40px;
+    text-shadow: 0 0 18px var(--accent-glow);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+/* CARD ALIGNMENT FIXED */
+.neon-card {
+    height: 260px;
+    padding: 35px 28px;
+    background: rgba(14, 25, 41, 0.6);
+    border: 1px solid var(--accent-glow);
+    border-radius: 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+/* new */ 
+.neon-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    padding: 6px 14px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+
+    color: var(--accent);
+    background: rgba(79,211,255,0.12);
+
+    border: 1px solid rgba(79,211,255,0.45);
+    border-radius: 14px;
+
+    box-shadow:
+        0 0 12px rgba(79,211,255,0.35),
+        inset 0 0 8px rgba(255,255,255,0.05);
+
+    text-transform: uppercase;
+}
+.neon-card {
+    position: relative;
+}
+
+/* */ 
+.neon-card .icon {
+    font-size: 34px;
+    margin-bottom: 14px;
+}
+
+.neon-card h3 {
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.neon-card p {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+/* CARD FLOAT RESTORED */
+.neon-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 0 35px var(--accent-glow);
+}
+
+/* POPUP (UNCHANGED LOOK) */
+.portal-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #0b2a3d 0%, #04131d 70%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 90px;
+    z-index: 9999;
+}
+
+/* CLOSE BUTTON (TOP RIGHT) */
+.close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 26px;
+    color: #ffffff;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.close-btn:hover { opacity: 1; }
+
+/* POPUP TITLE */
+.portal-overlay h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 0 0 14px var(--accent-glow);
+}
+
+/* ===== MAIN CONTENT BOX ===== */
+.portal-card {
+    width: 78%;
+    max-width: 950px;
+    padding: 36px 42px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid var(--accent-glow);
+    box-shadow: 0 0 40px rgba(0,0,0,0.6), inset 0 0 18px rgba(255,255,255,0.03);
+}
+
+.portal-card h3 { font-size: 16px; margin-bottom: 18px; font-weight: 600; }
+.portal-card ol { padding-left: 20px; }
+.portal-card li { font-size: 14.5px; line-height: 1.8; margin-bottom: 8px; opacity: 0.9; }
+
+/* ===== CTA BUTTON ===== */
+.portal-main-btn {
+    margin-top: 45px;
+    padding: 14px 38px;
+    font-size: 14px;
+    border-radius: 30px;
+    background: var(--accent);
+    color: #02121a;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 25px var(--accent-glow), 0 0 45px rgba(79,211,255,0.4);
+    transition: 0.3s ease;
+}
+
+.portal-main-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 35px var(--accent-glow), 0 0 65px rgba(79,211,255,0.5);
+}  
+/* ========================
+   VERIFY & PROTECT SECTION
+======================== */
+.info-section {
+    min-height: 82vh;
+    padding: 100px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-section h2 {
+    margin-bottom: 40px;
+    color: var(--accent);
+    text-shadow: 0 0 18px var(--accent-glow);
+}
+
+.three-cards {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* ========================
+   TOOL CARDS
+======================== */
+.tool-card {
+    position: relative;
+    padding: 38px 34px;
+    height: 320px;
+    background: linear-gradient(
+        180deg,
+        rgba(10, 22, 36, 0.92),
+        rgba(5, 14, 26, 0.96)
+    );
+    border-radius: 22px;
+    border: 1px solid rgba(79,211,255,0.25);
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.6),
+        inset 0 0 25px rgba(255,255,255,0.02);
+    transition: 0.4s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 45px var(--accent-glow);
+}
+
+/* Badge */
+.badge {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 14px;
+    letter-spacing: 0.4px;
+}
+
+.badge.malware {
+    background: rgba(79,211,255,0.15);
+    color: var(--accent);
+}
+
+.badge.privacy {
+    background: rgba(79,211,255,0.15);
+    color: var(--accent);
+}
+
+.badge.ai {
+    background: rgba(79,211,255,0.15);
+    color: var(--accent);
+}
+
+
+/* Card text */
+.tool-card h3 {
+    margin-top: 20px;
+    margin-bottom: 14px;
+    font-size: 30px;
+}
+
+.tool-card p {
+    font-size: 17px;
+    line-height: 1.7;
+    opacity: 0.85;
+}
+
+/* Buttons */
+.card-actions {
+    position: absolute;
+    bottom: 28px;
+    left: 34px;
+    right: 34px;
+    display: flex;
+    gap: 16px;
+}
+

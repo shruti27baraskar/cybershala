@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cybercrime Encyclopedia</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+:root{--accent:#4fd3ff}
+body{
+background:radial-gradient(circle at top,#071627,#061d2b);
+color:rgba(255,255,255,.9);
+overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+
+/* NAVBAR */
+.navbar{
+position:sticky;top:0;z-index:1000;
+display:flex;justify-content:space-between;align-items:center;
+padding:22px 70px;
+}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-img{width:70px}
+.brand{
+font-size:32px;font-weight:700;color:var(--accent);
+}
+nav a{
+margin-left:28px;padding:8px 18px;border-radius:30px;
+transition:.3s ease;
+}
+nav a:hover{
+color:var(--accent);
+background:rgba(79,211,255,.12);
+}
+
+/* HEADER */
+.page-header{padding:110px 70px 60px}
+.page-header h1{font-size:56px}
+.page-header span{color:var(--accent)}
+.page-header p{
+max-width:650px;margin-top:18px;
+font-size:18px;opacity:.85;
+}
+
+/* GRID */
+.book-section{padding:40px 70px 120px}
+.book-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:34px;
+}
+
+/* CARD */
+.book-card{
+position:relative;height:360px;
+padding:42px 32px;
+background:linear-gradient(180deg,#0c1c2c,#06101c);
+border-radius:20px;
+border:1px solid rgba(79,211,255,.25);
+transition:.35s ease;
+cursor:pointer;
+}
+.book-spine{
+position:absolute;left:0;top:0;width:10px;height:100%;
+background:var(--accent);
+}
+.book-card h3{margin:20px 0 18px;font-size:24px}
+.book-card p{font-size:15.5px;line-height:1.6;opacity:.85}
+.book-tag{
+position:absolute;bottom:26px;right:26px;
+font-size:11px;padding:6px 14px;border-radius:14px;
+color:var(--accent);
+border:1px solid rgba(79,211,255,.4);
+}
+.book-card{
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.book-card:hover{
+    transform: translateY(-12px);
+    border-color: rgba(79,211,255,0.8);
+    box-shadow:
+        0 0 18px rgba(79,211,255,0.25),
+        0 0 36px rgba(79,211,255,0.35);
+}
+
+
+/* POPUP */
+.popup-overlay{
+position:fixed;inset:0;
+background:rgba(2,10,18,.88);
+backdrop-filter:blur(6px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+.popup{
+width:70%;max-width:820px;
+background:linear-gradient(180deg,#0b1e2e,#071523);
+border-radius:16px;
+padding:42px;
+box-shadow:0 25px 60px rgba(0,0,0,.65);
+}
+.popup h2{color:var(--accent);margin-bottom:14px}
+.popup p{opacity:.9;margin-bottom:14px}
+.popup ul{padding-left:18px}
+.popup li{margin-bottom:10px;line-height:1.6}
+.close{
+position:absolute;top:28px;right:38px;
+font-size:24px;cursor:pointer;
+}
+
+/* VIDEO PAGE */
+.video-page{display:none;padding:120px 70px}
+.back-btn{
+margin-bottom:24px;
+background:transparent;color:var(--accent);
+border:1px solid rgba(79,211,255,.4);
+padding:10px 22px;border-radius:24px;
+cursor:pointer;
+}
+.video-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:40px;
+}
+.video-card{
+background:#0a2236;
+padding:26px;border-radius:18px;
+}
+.video-card video{
+width:100%;border-radius:12px;margin-bottom:16px;
+}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+.book-grid{grid-template-columns:repeat(2,1fr)}
+.video-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.book-grid{grid-template-columns:1fr}
+.page-header h1{font-size:42px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+<div class="logo">
+<img src="logo1.png" class="logo-img">
+<div class="brand">CyberShala</div>
+</div>
+<nav>
+<a href="index.html">Home</a>
+
+<a href="about.html">Contact</a>
+</nav>
+</header>
+
+<section class="page-header">
+<h1>Cybercrime <span>Encyclopedia</span></h1>
+<p>Clear explanations of modern cyber crimes and digital safety.</p>
+</section>
+
+<section class="book-section" id="cards">
+<div class="book-grid">
+
+<div class="book-card" onclick="openPopup('fraud')">
+<div class="book-spine"></div>
+<h3>Financial & UPI Fraud</h3>
+<p>Fake payment links, QR scams, refund frauds.</p>
+<span class="book-tag">FRAUD</span>
+</div>
+
+<div class="book-card" onclick="openPopup('sextortion')">
+<div class="book-spine"></div>
+<h3>Sextortion & Image Harvesting</h3>
+<p>Blackmail using private images and video calls.</p>
+<span class="book-tag">ABUSE</span>
+</div>
+
+<div class="book-card" onclick="openPopup('remote')">
+<div class="book-spine"></div>
+<h3>Remote Access Scams</h3>
+<p>AnyDesk & TeamViewer fraud techniques.</p>
+<span class="book-tag">SCAM</span>
+</div>
+
+<div class="book-card" onclick="openVideos()">
+<div class="book-spine"></div>
+<h3>Parents & Children Safety</h3>
+<p>Animated safety awareness videos.</p>
+<span class="book-tag">EDUCATION</span>
+</div>
+
+</div>
+</section>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+<div class="close" onclick="closePopup()">✕</div>
+<div class="popup">
+<h2 id="popupTitle"></h2>
+<p id="popupIntro"></p>
+<ul id="popupList"></ul>
+</div>
+</div>
+
+<!-- VIDEO PAGE -->
+<section class="video-page" id="videos">
+<button class="back-btn" onclick="goBack()">← Back to Encyclopedia</button>
+<h1><span style="color:var(--accent)">Parents & Children</span> Safety</h1>
+
+<div class="video-grid">
+
+<div class="video-card">
+<video controls>
+<source src="demo1.mp4" type="video/mp4">
+</video>
+<h3>Online Stranger Awareness</h3>
+<p>How children should respond to unknown messages.</p>
+</div>
+
+<div class="video-card">
+<video controls>
+<source src="demo2.mp4" type="video/mp4">
+</video>
+<h3>Safe Gaming & Screen Time</h3>
+<p>Understanding online games and chat risks.</p>
+</div>
+
+</div>
+</section>
+
+<script>
+const data={
+fraud:{
+title:"Financial & UPI Fraud",
+intro:"Financial frauds exploit urgency and trust.",
+points:[
+"Fake payment or refund links via SMS/WhatsApp",
+"QR codes that debit money",
+"Impersonation calls posing as banks or police",
+"Never share OTP or PIN",
+"Report immediately to cybercrime.gov.in"
+]
+},
+sextortion:{
+title:"Sextortion & Image Harvesting",
+intro:"Criminals emotionally manipulate victims.",
+points:[
+"Fake profiles initiate chats or video calls",
+"Private videos are secretly recorded",
+"Victims are threatened with leaks",
+"Never pay blackmailers",
+"Preserve evidence and report"
+]
+},
+remote:{
+title:"Remote Access Scams",
+intro:"Scammers take control of devices remotely.",
+points:[
+"Asked to install AnyDesk or TeamViewer",
+"Fake customer support scams",
+"Banking apps accessed remotely",
+"Disconnect internet immediately",
+"Uninstall and report"
+]
+}
+};
+
+function openPopup(type){
+document.getElementById("popupTitle").innerText=data[type].title;
+document.getElementById("popupIntro").innerText=data[type].intro;
+const list=document.getElementById("popupList");
+list.innerHTML="";
+data[type].points.forEach(p=>{
+const li=document.createElement("li");
+li.innerText=p;
+list.appendChild(li);
+});
+document.getElementById("popup").style.display="flex";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function openVideos(){
+document.getElementById("cards").style.display="none";
+document.querySelector(".page-header").style.display="none";
+document.getElementById("videos").style.display="block";
+window.scrollTo(0,0);
+}
+
+function goBack(){
+document.getElementById("videos").style.display="none";
+document.getElementById("cards").style.display="block";
+document.querySelector(".page-header").style.display="block";
+window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
